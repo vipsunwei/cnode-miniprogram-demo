@@ -1,2 +1,43 @@
-<!--miniprogram/pages/tabbar/home.wxml-->
-<text>miniprogram/pages/tabbar/home.wxml</text>
+<view class="container">
+  <van-tabs swipeable sticky active="{{ active }}" type="line" bind:change="handleChange">
+    <van-tab title="全部">
+      <view wx:for="{{ list }}" wx:for-index="idx" wx:for-item="item" wx:key="{{ idx }}" class="van-tab-item" bind:tap="handleTap">
+        <view class="van-tab-title">
+          <view class="tag-style">
+            <van-tag color="#ff4400">置顶</van-tag>
+          </view>
+          <view class="title-text">{{ item.title }}</view>
+        </view>
+        <view class="xiangqing">
+          <image class="circle" mode="widthFix" src="{{ item.author && item.author.avatar_url }}"></image>
+          <view class="miaoshu">
+            <view class="line1">
+              <view class="author">{{ item.author && item.author.loginname }}</view>
+              <view class="right-content">
+                <text class="reply-count">回复{{ item.reply_count }}</text>
+                <text class="visit-count">/访问{{ item.visit_count }}</text>
+              </view>
+            </view>
+            <view class="line2">
+              <view class="left-time">发表于{{ item.create_at }}</view>
+              <view class="right-time">最近回复{{ item.last_reply_at }}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </van-tab>
+    <view class="van-tab-item">
+      <van-tab title="精华">
+        <view class="circle">
+          <image mode="widthFix" src="https://avatars0.githubusercontent.com/u/29053523?s=460&v=4"></image>
+        </view>
+      </van-tab>
+    </view>
+    <view class="van-tab-item">
+      <van-tab class="height" title="问答">问答</van-tab>
+    </view>
+    <view class="van-tab-item"><van-tab class="height" title="分享">分享</van-tab></view>
+    <view class="van-tab-item"><van-tab class="height" title="招聘">招聘</van-tab></view>
+    <view class="van-tab-item"><van-tab class="height" title="测试">测试</van-tab></view>
+  </van-tabs>
+</view>

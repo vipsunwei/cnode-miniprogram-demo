@@ -1,1 +1,35 @@
 /* miniprogram/pages/tabbar/home.wxss */
+.container {
+  width: 100vw;
+}
+.width {
+  width: 100vw;
+}
+.height {
+  height: 200rpx;
+}
+.circle {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.van-tab-item {
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  background: #f5f1f1;
+  border: 1rpx solid #999999;
+  border-radius: 12rpx;
+}
+.van-tab-title {
+  display: flex;
+  align-items: center;
+}
+.tag-style {
+  width: 120rpx;
+  text-align: center;
+}
+.title-text {
+  display: inline-flex;
+}
