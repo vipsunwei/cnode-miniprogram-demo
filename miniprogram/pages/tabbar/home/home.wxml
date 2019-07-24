@@ -1,10 +1,10 @@
 <view class="container">
   <van-tabs swipeable sticky active="{{ active }}" type="line" bind:change="handleChange">
-    <van-tab title="全部">
+    <van-tab wx:for="{{ tabs }}" wx:for-index="index" wx:for-item="tabObj" wx:key="{{ index }}" title="{{ tabObj.text }}">
       <view wx:for="{{ list }}" wx:for-index="idx" wx:for-item="item" wx:key="{{ idx }}" class="van-tab-item" bind:tap="handleTap">
         <view class="van-tab-title">
           <view class="tag-style">
-            <van-tag color="#ff4400">置顶</van-tag>
+            <van-tag color="#ff4400">精华</van-tag>
           </view>
           <view class="title-text">{{ item.title }}</view>
         </view>
@@ -26,18 +26,5 @@
         </view>
       </view>
     </van-tab>
-    <view class="van-tab-item">
-      <van-tab title="精华">
-        <view class="circle">
-          <image mode="widthFix" src="https://avatars0.githubusercontent.com/u/29053523?s=460&v=4"></image>
-        </view>
-      </van-tab>
-    </view>
-    <view class="van-tab-item">
-      <van-tab class="height" title="问答">问答</van-tab>
-    </view>
-    <view class="van-tab-item"><van-tab class="height" title="分享">分享</van-tab></view>
-    <view class="van-tab-item"><van-tab class="height" title="招聘">招聘</van-tab></view>
-    <view class="van-tab-item"><van-tab class="height" title="测试">测试</van-tab></view>
   </van-tabs>
 </view>

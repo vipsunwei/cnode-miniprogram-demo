@@ -9,7 +9,33 @@ Page({
     list: [],
     page: 1,
     limit: 10,
-    tab: 'all'
+    tab: 'all',
+    tabs: [
+      {
+        tab: 'all',
+        text: '全部'
+      },
+      {
+        tab: 'good',
+        text: '精华'
+      },
+      {
+        tab: 'ask',
+        text: '问答'
+      },
+      {
+        tab: 'share',
+        text: '分享'
+      },
+      {
+        tab: 'job',
+        text: '招聘'
+      },
+      {
+        tab: 'dev',
+        text: '测试'
+      }
+    ]
   },
   getTopics ({ tab, limit, page }) {
     return new Promise((resolve, reject) => {
@@ -34,9 +60,12 @@ Page({
       })
     })
   },
+
   handleChange(event) {
     let index = event.detail.index;
     console.log(index);
+    let tabObj = this.data.tabs[index];
+    this.data.tab = tabObj.tab;
   },
   handleTap(event) {
     console.log('handleTap: ', event);
