@@ -1,0 +1,1 @@
+<van-tag style="{{ !tag.text ? 'display:none' : '' }}" text-color="{{ tag.textColor }}" color="{{ tag.bgColor }}" size="large" plain>{{ tag.text }}</van-tag>

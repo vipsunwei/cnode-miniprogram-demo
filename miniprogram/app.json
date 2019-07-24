@@ -2,6 +2,7 @@
   "pages": [
     "pages/tabbar/home/home",
     "pages/tabbar/me/me",
+    "pages/details/details",
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -16,16 +17,16 @@
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "cnode",
+    "navigationBarTitleText": "CNode",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
-    "color": "#666666",
-    "selectedColor": "#66aa66",
+    "color": "#4d4d4d",
+    "selectedColor": "#2ba245",
     "backgroundColor": "#F6F6F6",
     "list": [
       {

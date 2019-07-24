@@ -7,10 +7,10 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"coverView": true,
 		"nodeModules": true,
 		"autoAudits": false,
 		"checkInvalidKey": true,
+		"coverView": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
 		"babelSetting": {
@@ -18,7 +18,8 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"enhance": true
+		"enhance": true,
+		"uglifyFileName": true
 	},
 	"appid": "wx285b3c2c024e5b12",
 	"projectname": "cnode-cloud",

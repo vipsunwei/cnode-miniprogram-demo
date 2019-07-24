@@ -1,0 +1,17 @@
+<view class="detail-card">
+  <view class="detail-card-head">
+    <my-tag cur="{{ detail }}"></my-tag>
+    <text class="title">{{ detail.title }}</text>
+    <view class="author-info">
+      <view class="author">
+        <image class="circle" mode="widthFix" src="{{ detail.author.avatar_url }}" />
+        <text class="name">{{ detail.author.loginname }}</text>
+      </view>
+      <view class="right" hover-class="none" hover-stop-propagation="false">
+        <text>发表于：</text>
+        <text class="create-time">{{ detail.create_at_formatted }}</text>
+      </view>
+    </view>
+  </view>
+  <view class="detail-card-content">{{ detail.content }}</view>
+</view>

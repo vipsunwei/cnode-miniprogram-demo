@@ -1,28 +1,26 @@
-<view class="container">
-  <van-tabs swipeable sticky active="{{ active }}" type="line" bind:change="handleChange">
+<view>
+  <van-tabs color="#2ba245" swipeable sticky active="{{ active }}" bind:change="handleChange">
     <van-tab wx:for="{{ tabs }}" wx:for-index="index" wx:for-item="tabObj" wx:key="{{ index }}" title="{{ tabObj.text }}">
-      <view wx:for="{{ list }}" wx:for-index="idx" wx:for-item="item" wx:key="{{ idx }}" class="van-tab-item" bind:tap="handleTap">
-        <view class="van-tab-title">
-          <view class="tag-style">
-            <van-tag color="#ff4400">精华</van-tag>
+      <view class="topic-card" wx:for="{{ list }}" wx:for-index="idx" wx:for-item="item" wx:key="{{ idx }}">
+        <view class="topic-card-head" hover-class="none" hover-stop-propagation="false">
+          <my-tag cur="{{ item }}"></my-tag>
+          <view class="right">
+            <text class="reply-count">{{ item.reply_count }}</text>
+            <text class="visit-count">/{{ item.visit_count }} </text>
+            <text class="last-reply-time">·{{ item.last_reply_at_formatted }}</text>
           </view>
-          <view class="title-text">{{ item.title }}</view>
         </view>
-        <view class="xiangqing">
-          <image class="circle" mode="widthFix" src="{{ item.author && item.author.avatar_url }}"></image>
-          <view class="miaoshu">
-            <view class="line1">
-              <view class="author">{{ item.author && item.author.loginname }}</view>
-              <view class="right-content">
-                <text class="reply-count">回复{{ item.reply_count }}</text>
-                <text class="visit-count">/访问{{ item.visit_count }}</text>
-              </view>
-            </view>
-            <view class="line2">
-              <view class="left-time">发表于{{ item.create_at }}</view>
-              <view class="right-time">最近回复{{ item.last_reply_at }}</view>
-            </view>
+        <view class="topic-card-title" bind:tap="handleTap" data-topic-id="{{ item.id }}">{{ item.title }}</view>
+        <view class="topic-card-intro" bind:tap="handleTap" data-topic-id="{{ item.id }}">{{ item.content }}</view>
+        <view class="topic-card-foot" hover-class="none" hover-stop-propagation="false">
+          <view class="author-info" hover-class="none" hover-stop-propagation="false"> 
+            <image class="circle" mode="widthFix" src="{{ item.author && item.author.avatar_url }}"></image>
+            <text class="author">{{ item.author && item.author.loginname }}</text>
           </view>
+          <text class="create-time">
+            <text>发表于：</text>
+            <text>{{ item.create_at_formatted }}</text>
+          </text>
         </view>
       </view>
     </van-tab>

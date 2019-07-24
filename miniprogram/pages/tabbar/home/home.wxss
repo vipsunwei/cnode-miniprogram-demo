@@ -1,35 +1,63 @@
 /* miniprogram/pages/tabbar/home.wxss */
-.container {
-  width: 100vw;
+.topic-card {
+  margin-bottom: 20rpx;
+  background-color: #f1f1f1;
+  padding: 0 20rpx;
 }
-.width {
-  width: 100vw;
+.topic-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
 }
-.height {
-  height: 200rpx;
+.topic-card-head .right {
+  display: flex;
+  font-size: 28rpx;
 }
-.circle {
-  width: 120rpx;
-  height: 120rpx;
+.topic-card-head .right .reply-count {
+  color: #52c41a;
+}
+.topic-card-head .right .visit-count {
+  color: #888888;
+}
+.topic-card-head .right .last-reply-time {
+  color: #888888;
+  font-size: 28rpx;
+}
+.topic-card-title {
+  font-size: 40rpx;
+  font-weight: bolder;
+  color: #333333;
+  padding-bottom: 20rpx; 
+}
+.topic-card-intro {
+  color: #666666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.topic-card-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-top: 2rpx solid #dbdbdb;
+  margin-top: 20rpx;
+}
+.topic-card-foot .author {
+  margin-left: 20rpx;
+  color: #666666;
+}
+.topic-card-foot .circle {
+  vertical-align: middle;
+  width: 60rpx;
+  height: 60rpx;
   border-radius: 50%;
   overflow: hidden;
 }
-.van-tab-item {
-  width: 100vw;
-  box-sizing: border-box;
-  padding: 0 20rpx;
-  background: #f5f1f1;
-  border: 1rpx solid #999999;
-  border-radius: 12rpx;
-}
-.van-tab-title {
-  display: flex;
-  align-items: center;
-}
-.tag-style {
-  width: 120rpx;
-  text-align: center;
-}
-.title-text {
-  display: inline-flex;
+.topic-card-foot .create-time {
+  color: #888888;
+  font-size: 28rpx;
 }

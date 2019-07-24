@@ -38,19 +38,22 @@ Page({
     ]
   },
   getTopics ({ tab, limit, page }) {
+    let _this = this;
     return new Promise((resolve, reject) => {
       wx.request({
         url: 'https://cnodejs.org/api/v1/topics', //仅为示例，并非真实的接口地址
         data: {
           tab,
           limit,
-          page
+          page,
+          mdrender: 'false'
         },
         header: {
           'content-type': 'application/json' // 默认值
         },
         success (res) {
           console.log(res.data)
+          res.data.data = _this.formatTopicsTime(res.data.data);
           resolve(res.data)
         },
         fail (error) {
@@ -60,20 +63,49 @@ Page({
       })
     })
   },
+  formatTopicsTime (list) {
+    for (let i = 0, l = list.length; i < l; i++) {
+      const item = list[i];
+      item.create_at_formatted = item.create_at.split('T')[0];
+      // item.create_at_formatted = item.create_at.replace('T', ' ').split('.')[0];
+      item.last_reply_at_formatted = item.last_reply_at.replace('T', ' ').split('.')[0];
+    }
+    return list;
+  },
 
   handleChange(event) {
+    wx.showLoading({
+      title: '加载中'
+    });
     let index = event.detail.index;
     console.log(index);
     let tabObj = this.data.tabs[index];
     this.data.tab = tabObj.tab;
+    this.data.page = 1;
+    this.getTopics({ tab: this.data.tab, limit: this.data.limit, page: this.data.page })
+    .then(result => {
+      if ( result.success ) {
+        this.setData({ list: result.data });
+        wx.hideLoading();
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      wx.hideLoading();
+    })
   },
   handleTap(event) {
-    console.log('handleTap: ', event);
-    wx.showToast({
-      title: 'jump to detail page',
-      icon: 'none',
-      duration: 1500
-    })
+    let topicId = event.target.dataset.topicId;
+    wx.navigateTo({
+      url: '/pages/details/details?i=' + topicId,
+      success: (result)=>{
+        console.log(result, '成功');
+      },
+      fail: (error)=>{
+        console.log(error, '失败');
+      },
+      complete: ()=>{}
+    });
   },
   mergeTopics ({ list }) {
     let newList = this.data.list.concat(list);
@@ -83,12 +115,22 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: async function (options) {
-    console.log('onload: load all data', this.data.tab)
-    let result = await this.getTopics({ tab: this.data.tab, limit: this.data.limit, page: this.data.page });
-    if (result.success) {
-      this.setData({ list: result.data });
-    }
+  onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    });
+    console.log('onload: load tab : all data', this.data.tab)
+    this.getTopics({ tab: this.data.tab, limit: this.data.limit, page: this.data.page })
+    .then(result => {
+      if (result.success) {
+        this.setData({ list: result.data });
+        wx.hideLoading();
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      wx.hideLoading();
+    });
   },
   
 
@@ -123,38 +165,58 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: async function () {
-    wx.setBackgroundTextStyle({
-      textStyle: 'dark' // 下拉背景字体、loading 图的样式为dark
-    })
+  onPullDownRefresh: function () {
     this.data.page = 1;
     console.log('下拉刷新page：', this.data.page);
-    let result = await this.getTopics({ tab: this.data.tab, limit: this.data.limit, page: this.data.page });
-    if ( result.success ) {
-      this.setData({ list: result.data });
+    this.getTopics({ tab: this.data.tab, limit: this.data.limit, page: this.data.page })
+    .then(result => {
+      if ( result.success ) {
+        this.setData({ list: result.data });
+        wx.stopPullDownRefresh();
+      }
+    })
+    .catch(error => {
+      console.log(error);
       wx.stopPullDownRefresh();
-    }
+    })
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: async function () {
+  onReachBottom: function () {
     wx.showLoading({
       title: '加载中',
     });
     this.data.page += 1;
-    let result = await this.getTopics({ tab: this.data.tab, limit: this.data.limit, page: this.data.page });
-    if ( result.success ) {
-      this.mergeTopics({ list: result.data });
+    this.getTopics({ tab: this.data.tab, limit: this.data.limit, page: this.data.page })
+    .then(result => {
+      if ( result.success ) {
+        this.mergeTopics({ list: result.data });
+        wx.hideLoading();
+      }
+    })
+    .catch(error => {
+      console.log(error);
       wx.hideLoading();
-    }
+    });
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function ({ from, target }) {
+    console.log('from: ' + from);
+    console.log('target: ', target);
+    return {
+      title: 'CNode: Node.js中文社区',
+      path: '/pages/tabbar/home/home',
+      success: function (result) {
+        console.log(result, '成功');
+      },
+      fail: function (error) {
+        console.log(error, '失败');
+      }
+    }
   }
 })

@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "my-tag": "/components/my-tag/my-tag"
+  }
+}

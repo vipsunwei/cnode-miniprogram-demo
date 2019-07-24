@@ -1,0 +1,44 @@
+.detail-card {
+  padding: 0 20rpx;
+}
+
+.detail-card-head {
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #dbdbdb;
+}
+
+.detail-card-head .title {
+  font-size: 40rpx;
+  font-weight: bolder;
+  margin-left: 20rpx;
+}
+
+.detail-card-head .author-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+
+.detail-card-head .author-info .circle {
+  vertical-align: middle;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.detail-card-head .author-info .name {
+  color: #2782d7;
+  margin-left: 20rpx;
+}
+
+.detail-card-head .author-info .right {
+  color: #888888;
+  font-size: 28rpx;
+}
+
+.detail-card-content {
+  padding: 40rpx 0;
+  word-break:break-all;
+}
